@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'src/services/auth_service.dart';
 import 'src/usuarios/login.dart';
 import 'src/paginas/abastecimento_form.dart';
+import 'src/paginas/abastecimento_list.dart';
+import 'src/paginas/veiculos_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -62,6 +64,20 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => AbastecimentoListPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.graphic_eq,
+                color: Colors.deepPurple,
+              ),
+              title: const Text("Grafico de Custos"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => GraficoPage()),
                 );
               },
             ),
