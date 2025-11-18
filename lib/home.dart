@@ -1,3 +1,5 @@
+import 'package:atividadefinal/src/paginas/abastecimento_list.dart';
+import 'package:atividadefinal/src/paginas/veiculos_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -30,6 +32,15 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (_) => VeiculoListPage()),
+                  );
+                },
+              ),
+              ElevatedButton(
+                child: Text("Gerenciar Abastecimentos"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => AbastecimentoListPage()),
                   );
                 },
               ),

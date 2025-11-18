@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/veiculos.dart';
+import '../models/abastecimento.dart';
 
 class FirestoreService {
   final _db = FirebaseFirestore.instance;
@@ -37,6 +38,43 @@ class FirestoreService {
         .collection("users")
         .doc(uid)
         .collection("veiculos")
+        .doc(id)
+        .delete();
+  }
+
+  Future<void> addAbastecimento(Abastecimento a) async {
+    await _db
+        .collection("users")
+        .doc(uid)
+        .collection("abastecimentos")
+        .add(a.toMap());
+  }
+
+  Future<List<Abastecimento>> getAbastecimentos() async {
+    final snap = await _db
+        .collection("users")
+        .doc(uid)
+        .collection("abastecimentos")
+        .orderBy("data", descending: true)
+        .get();
+
+    return snap.docs.map((doc) => Abastecimento.fromFirestore(doc)).toList();
+  }
+
+  Future<void> updateAbastecimento(Abastecimento a) async {
+    await _db
+        .collection("users")
+        .doc(uid)
+        .collection("abastecimentos")
+        .doc(a.id)
+        .update(a.toMap());
+  }
+
+  Future<void> deleteAbastecimento(String id) async {
+    await _db
+        .collection("users")
+        .doc(uid)
+        .collection("abastecimentos")
         .doc(id)
         .delete();
   }
